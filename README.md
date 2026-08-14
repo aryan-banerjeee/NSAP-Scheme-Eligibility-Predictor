@@ -50,14 +50,15 @@ The dataset contains district-level demographic and beneficiary statistics colle
 15. Mobile Number Coverage
 
 *Target Variable*
+
 16. schemecode
 
 # Predicted Classes
 Scheme Code	Scheme Name
 
-IGNOAPS	Indira Gandhi National Old Age Pension Scheme
-IGNWPS	Indira Gandhi National Widow Pension Scheme
-IGNDPS	Indira Gandhi National Disability Pension Scheme
+IGNOAPS	Indira Gandhi National Old Age Pension Scheme  \  
+IGNWPS	Indira Gandhi National Widow Pension Scheme  \     
+IGNDPS	Indira Gandhi National Disability Pension Scheme  \    
 
 # Technology Stack
 
