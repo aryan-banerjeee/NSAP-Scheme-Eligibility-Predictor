@@ -1,8 +1,0 @@
-# 1. Stage the CSV file
-git add Social Welfare Schemes.csv
-
-# 2. Commit the changes
-git commit -m "Add CSV dataset"
-
-# 3. Push to GitHub
-git push origin main
