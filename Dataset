@@ -1,6 +1,8 @@
-# from inside your repo folder
-mv ~/Downloads/Social Welfare Schemes.csv data/
+# 1. Stage the CSV file
+git add Social Welfare Schemes.csv
 
-git add data/Social Welfare Schemes.csv
-git commit -m "Add NSAP district-level dataset"
-git push
+# 2. Commit the changes
+git commit -m "Add CSV dataset"
+
+# 3. Push to GitHub
+git push origin main
