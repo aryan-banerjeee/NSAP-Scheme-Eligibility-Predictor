@@ -1,0 +1,6 @@
+# from inside your repo folder
+mv ~/Downloads/Social Welfare Schemes.csv data/
+
+git add data/Social Welfare Schemes.csv
+git commit -m "Add NSAP district-level dataset"
+git push
