@@ -1,209 +1,272 @@
-# NSAP-Scheme-Eligibility-Predictor
-## Kosh-AI: NSAP Scheme Eligibility Predictor using IBM watsonx.ai
+# Kosh-AI: NSAP Scheme Demand Predictor using IBM watsonx.ai
 
-An AI-powered machine learning solution for automated multi-class classification of National Social Assistance Programme (NSAP) pension schemes using IBM watsonx.ai AutoAI and IBM Cloud Lite Services.
+> **An AI-powered machine learning solution for automated, district-level classification of National Social Assistance Programme (NSAP) pension schemes using IBM watsonx.ai AutoAI and IBM Cloud Lite Services.**
 
-# Project Overview
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![IBM watsonx.ai](https://img.shields.io/badge/IBM-watsonx.ai-052FAD)
+![AutoAI](https://img.shields.io/badge/IBM-AutoAI-052FAD)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Deployed-success)
 
-Kosh-AI is an end-to-end Machine Learning solution developed as part of the Edunet Foundation – IBM SkillsBuild AICTE Internship Program 2026. The project leverages IBM watsonx.ai AutoAI, IBM Watson Machine Learning, and IBM Cloud Lite Services to automate the prediction of the most appropriate National Social Assistance Programme (NSAP) pension scheme using district-level demographic and beneficiary statistics.
+---
 
-The National Social Assistance Programme (NSAP), an initiative of the Government of India, provides financial assistance to elderly individuals, widows, and persons with disabilities belonging to economically vulnerable households. Traditionally, the process of verifying beneficiary records and assigning the appropriate pension scheme requires considerable manual effort and is susceptible to inconsistencies and delays.
+## Table of Contents
 
-Kosh-AI addresses this challenge by utilizing machine learning to analyze demographic patterns and recommend the most suitable NSAP pension scheme. The solution demonstrates the complete lifecycle of an enterprise AI application—from data ingestion and model training to cloud deployment and real-time inference through REST APIs.
+- [Project Overview](#project-overview)
+- [Problem Statement](#problem-statement)
+- [Objectives](#objectives)
+- [Dataset](#dataset)
+- [Technology Stack](#technology-stack)
+- [Solution Architecture](#solution-architecture)
+- [Project Workflow](#project-workflow)
+- [Model Performance](#model-performance)
+- [Sample Prediction](#sample-prediction)
+- [Repository Structure](#repository-structure)
+- [Getting Started](#getting-started)
+- [Important Note on Scope](#important-note-on-scope)
+- [Future Enhancements](#future-enhancements)
+- [Acknowledgements](#acknowledgements)
+- [Author](#author)
+- [License](#license)
 
-# Problem Statement
+---
 
-The National Social Assistance Programme (NSAP) consists of multiple pension schemes, each designed for different beneficiary categories. Manual verification and classification of applicants can be time-consuming, resource-intensive, and may lead to inconsistencies in welfare allocation.
+## Project Overview
 
-The objective of this project is to develop a machine learning model capable of accurately predicting the appropriate NSAP pension scheme based on district-level demographic and socio-economic information. The solution is intended to support government agencies by providing a faster and more consistent decision-support mechanism for welfare distribution.
+Kosh-AI is an end-to-end Machine Learning solution developed as part of the **Edunet Foundation – IBM SkillsBuild AICTE Internship Program 2026**. The project leverages **IBM watsonx.ai AutoAI**, **IBM Watson Machine Learning**, and **IBM Cloud Lite Services** to automate the prediction of the most likely **National Social Assistance Programme (NSAP)** pension scheme category using district-level demographic and beneficiary statistics.
 
-# Objectives
-1. Develop an AI-powered classification model for NSAP scheme prediction.
-2. Automate the beneficiary classification process using machine learning.
-3. Reduce manual effort involved in scheme allocation.
-4. Improve the consistency and efficiency of welfare distribution.
-5. Demonstrate an end-to-end AI deployment workflow using IBM Cloud.
-6. Enable real-time predictions through a cloud-hosted REST API.
+The National Social Assistance Programme (NSAP), an initiative of the Government of India, provides financial assistance to elderly individuals, widows, and persons with disabilities belonging to economically vulnerable households. Traditionally, verifying beneficiary records and allocating them across the correct pension scheme requires considerable manual effort at the district administration level and is susceptible to inconsistency and delay.
 
-# Dataset
+Kosh-AI addresses this by using machine learning to analyze demographic composition at the district level and classify the dominant NSAP scheme pattern for that district. The solution demonstrates the complete lifecycle of an enterprise AI application — from data ingestion and automated model training to cloud deployment and real-time inference through a REST API.
 
-## Source: AI Kosh – National Social Assistance Programme (NSAP) Dataset
+---
 
-The dataset contains district-level demographic and beneficiary statistics collected under the National Social Assistance Programme.
+## Problem Statement
 
-*Features*
+The National Social Assistance Programme (NSAP) consists of multiple pension schemes, each designed for different beneficiary categories. Manual verification and classification of records at scale can be time-consuming, resource-intensive, and prone to inconsistency across districts and states.
 
-1. Financial Year
-2. State Code
-3. State Name
-4. District Code
-5. District Name
-6. Total Beneficiaries
-7. Total Male Beneficiaries
-8. Total Female Beneficiaries
-9. Total Transgender Beneficiaries
-10. Scheduled Caste (SC) Beneficiaries
-11. Scheduled Tribe (ST) Beneficiaries
-12. General Category Beneficiaries
-13. Other Backward Class (OBC) Beneficiaries
-14. Aadhaar Coverage
-15. Mobile Number Coverage
+This project develops a machine learning model capable of predicting the most likely NSAP pension scheme category for a district, based on that district's demographic and socio-economic profile — supporting government agencies with a faster, more consistent decision-support mechanism for welfare planning and resource allocation.
 
-*Target Variable*
+---
 
-16. schemecode
+## Objectives
 
-# Predicted Classes
-Scheme Code	Scheme Name
+* Develop an AI-powered classification model for NSAP scheme prediction.
+* Automate district-level scheme-pattern classification using machine learning.
+* Reduce manual effort involved in welfare planning and scheme allocation review.
+* Improve the consistency and efficiency of welfare distribution decision-support.
+* Demonstrate an end-to-end AI deployment workflow using IBM Cloud.
+* Enable real-time predictions through a cloud-hosted REST API.
 
-IGNOAPS	Indira Gandhi National Old Age Pension Scheme  \  
-IGNWPS	Indira Gandhi National Widow Pension Scheme  \     
-IGNDPS	Indira Gandhi National Disability Pension Scheme  \    
+---
 
-# Technology Stack
+## Dataset
 
-Cloud Platform
-IBM Cloud Lite
-AI & Machine Learning
-IBM watsonx.ai Studio
-IBM watsonx.ai AutoAI
-IBM Watson Machine Learning
-Snap Decision Tree Classifier
-Programming
-Python 3.12
-Jupyter Notebook
-Libraries
-Pandas
-NumPy
-Requests
-IBM watsonx.ai SDK
+**Source:** AI Kosh (IndiaAI) – National Social Assistance Programme (NSAP) Dataset
+**Granularity:** District-level, aggregated per scheme, Financial Year 2025–2026
+**Size:** 2,156 records across 726 districts, 36 states/UTs, 3 scheme categories
 
+### Features
 
-# Project Workflow
+| Column | Description |
+|---|---|
+| `finyear` | Financial year of the record |
+| `lgdstatecode` | LGD state code |
+| `statename` | State/UT name |
+| `lgddistrictcode` | LGD district code |
+| `districtname` | District name |
+| `totalbeneficiaries` | Total beneficiaries under the scheme |
+| `totalmale` / `totalfemale` / `totaltransgender` | Beneficiaries by gender |
+| `totalsc` / `totalst` / `totalgen` / `totalobc` | Beneficiaries by social category |
+| `totalaadhaar` | Beneficiaries with Aadhaar linked |
+| `totalmobilenumber` | Beneficiaries with mobile number linked |
 
-1. Data Collection
+### Target Variable
 
-The district-wise NSAP dataset was obtained from AI Kosh and uploaded to IBM Cloud Object Storage. The dataset contains aggregated demographic and beneficiary information across districts in India.
+```
+schemecode
+```
 
-2. Data Ingestion
+### Predicted Classes
 
-The dataset was securely accessed within IBM watsonx.ai Studio using the IBM Cloud Object Storage integration. Data was loaded into a Pandas DataFrame for further analysis and preprocessing.
+| Scheme Code | Scheme Name |
+|---|---|
+| IGNOAPS | Indira Gandhi National Old Age Pension Scheme |
+| IGNWPS | Indira Gandhi National Widow Pension Scheme |
+| IGNDPS | Indira Gandhi National Disability Pension Scheme |
 
-3. Automated Machine Learning
+---
 
-IBM watsonx.ai AutoAI was used to automate the machine learning workflow. AutoAI performed:
+## Technology Stack
 
-Data preprocessing
-Feature engineering
-Categorical encoding
-Pipeline generation
-Hyperparameter optimization
-Cross-validation
-Model evaluation
+**Cloud Platform**
+- IBM Cloud Lite
 
-Several machine learning pipelines were automatically generated and evaluated.
+**AI & Machine Learning**
+- IBM watsonx.ai Studio
+- IBM watsonx.ai AutoAI
+- IBM Watson Machine Learning
+- Snap Random Forest Classifier (SnapML, `BatchedTreeEnsembleClassifier`)
 
-4. Model Selection
+**Programming**
+- Python 3.12
+- Jupyter Notebook
 
-AutoAI ranked all generated pipelines according to predictive performance.
+**Libraries**
+- `ibm-watsonx-ai`
+- `autoai-libs`
+- `lale`
+- `scikit-learn`
+- `snapml`
+- `xgboost`, `lightgbm` (evaluated as candidate estimators)
+- `pandas`, `numpy`, `matplotlib`
+
+**Data Source**
+- AI Kosh Dataset (IndiaAI)
+
+---
+
+## Solution Architecture
+
+```text
+                     AI Kosh Dataset
+                            │
+                            ▼
+                 IBM Cloud Object Storage
+                            │
+                            ▼
+               IBM watsonx.ai Studio Project
+                            │
+                            ▼
+                  Data Preparation & Analysis
+                            │
+                            ▼
+               IBM watsonx.ai AutoAI Training
+             (multiclass, target = schemecode)
+                            │
+                            ▼
+          Multiple ML Pipeline Evaluation
+   (Snap Random Forest, Batched Extra Trees, LightGBM)
+                            │
+                            ▼
+          Best Model Selection — Pipeline_5
+             Snap Random Forest Classifier
+                            │
+                            ▼
+        Incremental Training (partial_fit, batched)
+                            │
+                            ▼
+                  Model Registration
+                            │
+                            ▼
+                IBM Deployment Space
+                            │
+                            ▼
+               Online Model Deployment
+                            │
+                            ▼
+                  REST API Endpoint
+                            │
+                            ▼
+              Real-Time Prediction Service
+```
+
+---
+
+## Project Workflow
+
+### 1. Data Collection
+The district-wise NSAP dataset was obtained from AI Kosh and uploaded to IBM Cloud Object Storage as a project data asset.
+
+### 2. Data Ingestion
+The dataset was accessed within IBM watsonx.ai Studio via the Cloud Object Storage integration (`DataConnection` / `data_asset_id`) and loaded for AutoAI training.
+
+### 3. Automated Machine Learning
+IBM watsonx.ai AutoAI was configured as a **multiclass** experiment (`prediction_column='schemecode'`, `scoring='accuracy'`, `holdout_size=0.1`) and automated:
+
+- Data preprocessing and cleaning (duplicate removal)
+- Categorical encoding
+- Feature selection
+- Pipeline generation across multiple batched ensemble estimators (Random Forest, Extra Trees, LightGBM — all SnapML-accelerated)
+- Hyperparameter optimization
+- Cross-validation and holdout evaluation
+
+### 4. Model Selection
+AutoAI ranked all generated pipelines by holdout accuracy via `pipeline_optimizer.summary()`.
 
 The best-performing pipeline was:
 
-Pipeline 4
+**Pipeline_5 — Snap Random Forest Classifier** (`BatchedTreeEnsembleClassifier`)
 
-Algorithm:
+Feature importances for the winning pipeline were extracted using `get_pipeline_details()['features_importance']`.
 
-Snap Decision Tree Classifier
+### 5. Incremental Training
+A dedicated notebook resumed Pipeline_5 as a `lale`-wrapped estimator and continued training via batch-wise `partial_fit()` calls over the full dataset (batch size = 2,156 rows), with learning-curve tracking across batches. This supports future retraining as new financial-year data becomes available, without discarding the AutoAI-selected pipeline structure.
 
-The selected model demonstrated the highest overall performance for multi-class classification of NSAP schemes.
+### 6. Model Registration
+The trained pipeline was registered in the IBM watsonx.ai project repository (`client.repository.store_model`) for version control and deployment readiness.
 
-5. Model Registration
+### 7. Model Deployment
+A dedicated **IBM Deployment Space** was created to separate production assets from the development project. The model was promoted to this space and deployed as an **Online Deployment**, exposing a secure REST scoring endpoint.
 
-The champion model was registered within the IBM watsonx.ai project to enable version control, governance, and deployment readiness.
+### 8. Real-Time Inference
+The deployed endpoint was tested with a live scoring request. The model returned a prediction and full class-probability vector in real time — confirmed below in [Sample Prediction](#sample-prediction).
 
-6. Model Deployment
+---
 
-A dedicated IBM Deployment Space was created to isolate production assets from development resources.
+## Model Performance
 
-The trained model was promoted to the deployment space and deployed as an Online Deployment, exposing a secure REST API endpoint capable of serving real-time predictions.
+AutoAI evaluated multiple batched ensemble pipelines under `include_batched_ensemble_estimators` before selecting the champion model:
 
-7. Real-Time Inference
+| Model | Status |
+|---|---|
+| Snap Random Forest Classifier (Pipeline_5) | ✅ Selected |
+| Batched Extra Trees Classifier | Evaluated |
+| Batched LightGBM Classifier | Evaluated |
 
-The deployed model was accessed using authenticated REST API calls. A JSON payload containing district-level demographic information was submitted to the online deployment, and the model returned the predicted NSAP pension scheme along with confidence probabilities.
+The selected Snap Random Forest pipeline was deployed as the production model and validated via incremental training and holdout evaluation.
 
-Example response:
+---
 
-{
-  "predictions": [
-    {
-      "fields": [
-        "prediction",
-        "probability"
-      ],
-      "values": [
-        [
-          "IGNOAPS",
-          [0.0, 1.0, 0.0]
-        ]
+## Sample Prediction
+
+### Live API Test Result
+
+A scoring request was sent to the deployed online endpoint. The service returned:
+
+```json
+[
+  {
+    "fields": ["prediction", "probability"],
+    "values": [
+      [
+        "IGNDPS",
+        [0.9867446884372569, 0.013255311562742558, 0]
       ]
-    }
-  ]
-}
+    ]
+  }
+]
+```
 
-# Model Performance
+### Interpretation
 
-AutoAI evaluated multiple candidate pipelines before selecting the optimal model.
-
-Model	Status
-Snap Decision Tree Classifier	✅ Selected
-Random Forest	Evaluated
-Gradient Boosting	Evaluated
-Logistic Regression	Evaluated
-Decision Tree	Evaluated
-
-The selected Snap Decision Tree pipeline demonstrated the best predictive performance and was deployed as the production model.
-
-# Key Features
-
-1. End-to-end Machine Learning pipeline using IBM watsonx.ai.
-2. Automated feature engineering and model selection using AutoAI.
-3. Multi-class classification of NSAP pension schemes.
-4. Cloud-native deployment using IBM Watson Machine Learning.
-5. Secure REST API for real-time predictions.
-6. Scalable architecture suitable for integration into government decision-support systems.
-7. Enterprise-grade model governance and deployment workflow.
-
-# Sample Prediction
-Input
-{
-  "finyear": "2025-2026",
-  "lgdstatecode": 1,
-  "statename": "JAMMU AND KASHMIR",
-  "lgddistrictcode": 1,
-  "districtname": "ANANTNAG",
-  "totalbeneficiaries": 8393,
-  "totalmale": 5037,
-  "totalfemale": 3356,
-  "totaltransgender": 0,
-  "totalsc": 37,
-  "totalst": 232,
-  "totalgen": 8039,
-  "totalobc": 85,
-  "totalaadhaar": 8327,
-  "totalmpbilenumber": 7162
-}
-
-Output
+```text
 Predicted Scheme Code:
-IGNOAPS
+IGNDPS
 
 Scheme Name:
-Indira Gandhi National Old Age Pension Scheme
+Indira Gandhi National Disability Pension Scheme
 
 Confidence:
-[0.0, 1.0, 0.0]
-Repository Structure
-Kosh-AI-NSAP-Scheme-Predictor
+98.67%
+```
+
+---
+
+## Repository Structure
+
+```
+Kosh-AI-NSAP-Scheme-Predictor/
 │
 ├── README.md
 ├── requirements.txt
@@ -211,11 +274,11 @@ Kosh-AI-NSAP-Scheme-Predictor
 ├── .gitignore
 │
 ├── notebooks/
-│   ├── NSAP_Eligibility_Prediction.ipynb
-│   └── AutoAI_Local_Notebook.ipynb
+│   ├── Kosh-AI_NSAP_Predictor_Notebook.ipynb        # AutoAI experiment, pipeline comparison, deployment
+│   └── P5_Snap_Random_Forest_Incremental.ipynb      # Incremental training (partial_fit) on Pipeline_5
 │
 ├── data/
-│   └── district_wise_pension_data.csv
+│   └── Social_Welfare_Schemes.csv
 │
 ├── screenshots/
 │   ├── dataset.png
@@ -226,33 +289,76 @@ Kosh-AI-NSAP-Scheme-Predictor
 │
 ├── docs/
 │   ├── Project_Report.pdf
+│   ├── MODEL_CARD.md
 │   └── Presentation.pdf
 │
 └── api/
     └── scoring_example.py
+```
 
-Future Enhancements
+---
 
-1. Integration with citizen-facing web applications.
-2. Explainable AI (XAI) for transparent prediction explanations.
-3. Interactive analytics dashboard using IBM Cognos or Streamlit.
-4. Geospatial visualization of welfare scheme distribution.
-5. Continuous retraining using updated AI Kosh datasets.
-6. Integration with additional government welfare datasets for enhanced decision support.
-# Important Note
+## Getting Started
 
-This solution is trained on district-level aggregated demographic and beneficiary data provided by the AI Kosh dataset. As a result, the model predicts the most appropriate NSAP pension scheme category for a district profile rather than determining the eligibility of individual citizens. The system is intended to function as a decision-support tool to assist welfare administration and streamline scheme classification workflows.
+```bash
+# Clone the repository
+git clone https://github.com/<your-username>/Kosh-AI-NSAP-Scheme-Predictor.git
+cd Kosh-AI-NSAP-Scheme-Predictor
 
-# Acknowledgements
-IBM SkillsBuild
-Edunet Foundation
-AICTE
-IBM watsonx.ai
-IBM Cloud Lite
-AI Kosh (IndiaAI) for providing the NSAP dataset.
+# Install dependencies
+pip install -r requirements.txt
 
-# Author
+# Set required environment variables (never commit real values)
+export IBM_CLOUD_API_KEY=your_api_key
+export WML_PROJECT_ID=your_project_id
+export WML_SPACE_ID=your_space_id
+export WML_DEPLOYMENT_ID=your_deployment_id
 
-Aryan Banerjee
+# Run a sample scoring request
+python api/scoring_example.py
+```
 
+> API credentials are never hardcoded in notebooks or scripts. See `.env.example` for the required variable names.
+
+---
+
+## Important Note on Scope
+
+This solution is trained on **district-level aggregated demographic and beneficiary data** from the AI Kosh dataset, not individual applicant records. As a result, the model predicts the **most likely NSAP scheme pattern for a district profile**, not the eligibility of any individual citizen. NSAP eligibility remains a statutory, rule-based determination (age, income, disability certification, marital status) made by the relevant government authority. Kosh-AI is intended purely as a **decision-support and planning tool** for welfare administration — helping anticipate district-level demand and resource needs, not to make or override individual eligibility decisions.
+
+---
+
+## Future Enhancements
+
+* Multi-year time-series modeling as additional NSAP financial-year data becomes available.
+* Explainable AI (SHAP/LIME) for transparent, auditable predictions.
+* Fairness/bias audit across gender and social-category (SC/ST/OBC) subgroups.
+* Interactive analytics dashboard using IBM Cognos or Streamlit.
+* Geospatial visualization of scheme distribution across districts.
+* CI/CD integration (GitHub Actions) for automated retraining and champion/challenger deployment gating.
+* Lightweight FastAPI wrapper around the Watson ML deployment for cleaner request/response handling and logging.
+* Integration with additional government welfare datasets (e.g., PM-KISAN, ration card digitization) for broader decision support.
+
+---
+
+## Acknowledgements
+
+* **IBM SkillsBuild**
+* **Edunet Foundation**
+* **AICTE**
+* **IBM watsonx.ai**
+* **IBM Cloud Lite**
+* **AI Kosh (IndiaAI)** for providing the NSAP dataset.
+
+---
+
+## Author
+
+**Aryan Banerjee**
 AICTE – Edunet Foundation IBM SkillsBuild Internship 2026
+
+---
+
+## License
+
+This project is released under the **MIT License**. See the `LICENSE` file for details.
